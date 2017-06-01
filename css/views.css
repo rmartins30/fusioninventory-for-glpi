@@ -1,3 +1,4 @@
+
 .msgboxmonit {
     margin: 0 auto 20px;
     width: 700px;
@@ -885,6 +886,63 @@ table.runs td.comment {
 .fi_board .fi_chart svg {
    background-color: #f3f3f3;
 }
+
+ul#fusionmenu a.itemP{
+   display: block;
+   height: 100%;
+/*   width: 100%;  */
+   text-align: center;
+   text-decoration: none;
+   font-size: 13px;
+   white-space: nowrap;
+   padding: 0px 1em;
+}
+ul#fusionmenu ul.ssmenu {
+   background: rgba(255, 255, 255, 0.9);
+   display: none;
+   box-shadow: 0px 2px 2px 1px #BCB6B3;
+}
+ul#fusionmenu ul li {
+   list-style: none;
+   text-align: left;
+   line-height: 20px;
+   font-size: 0.9em;
+}
+ul#fusionmenu ul li:last-child  {
+   border-bottom: 0px;
+}
+ul#fusionmenu ul li a {
+   text-decoration: none;
+   display: block;
+   padding: 5px 5px 5px 5px;
+}
+ul#fusionmenu a.itemP {
+   color: #FFF;
+}
+ul#fusionmenu > li {
+   display: inline-block;
+   min-width: 135px;
+   height: 30px;
+   margin-top: -8px;
+   padding-top: 8px;
+   box-sizing: border-box;
+}
+ul#fusionmenu ul.ssmenu {
+   position: absolute;
+   min-width: 135px;
+   z-index: 200;
+}
+#c_menu ul#fusionmenu {
+   height: 30px;
+   list-style: none;
+   padding: 8px 0;
+   font-size: 13px;
+   box-sizing: border-box;
+   margin: 0 auto;
+   /*width: 1000px;*/
+   display: inline-block;
+}
+
 
 @media screen and (max-width: 700px) {
    .fi_board {
