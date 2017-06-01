@@ -232,7 +232,11 @@ class PluginFusioninventoryMenu extends CommonGLPI {
       }
 
       $width_status = 0;
+      
+      echo "<div id='c_menu'>";
+      echo "<ul id='fusionmenu'>";
 
+/*
       echo "<div align='center' style='height: 35px; display: inline-block; width: 100%; margin: 0 auto;'>";
       echo "<table width='100%'>";
 
@@ -242,7 +246,8 @@ class PluginFusioninventoryMenu extends CommonGLPI {
       echo "<table>";
       echo "<tr>";
       echo "<td>";
-
+*/
+      
       /*
        * General
        */
@@ -270,7 +275,7 @@ class PluginFusioninventoryMenu extends CommonGLPI {
          $width_status = PluginFusioninventoryMenu::htmlMenu(__('General', 'fusioninventory'),
                                                              $a_menu,
                                                              $type,
-                                                             $width_status);
+                                                             8);
       }
 
       /*
@@ -317,7 +322,7 @@ class PluginFusioninventoryMenu extends CommonGLPI {
          $width_status = PluginFusioninventoryMenu::htmlMenu(__('Tasks', 'fusioninventory'),
                                                              $a_menu,
                                                              $type,
-                                                             $width_status);
+                                                             9);
       }
 
       /*
@@ -374,7 +379,7 @@ class PluginFusioninventoryMenu extends CommonGLPI {
          $width_status = PluginFusioninventoryMenu::htmlMenu(__('Rules', 'fusioninventory'),
                                                              $a_menu,
                                                              $type,
-                                                             $width_status);
+                                                             10);
       }
 
       /*
@@ -449,7 +454,7 @@ class PluginFusioninventoryMenu extends CommonGLPI {
          $width_status = PluginFusioninventoryMenu::htmlMenu(__('Networking', 'fusioninventory'),
                                                              $a_menu,
                                                              $type,
-                                                             $width_status);
+                                                             11);
       }
 
       /*
@@ -477,7 +482,7 @@ class PluginFusioninventoryMenu extends CommonGLPI {
          $width_status = PluginFusioninventoryMenu::htmlMenu(__('Deploy', 'fusioninventory'),
                                                              $a_menu,
                                                              $type,
-                                                             $width_status);
+                                                             12);
       }
 
       /*
@@ -501,10 +506,13 @@ class PluginFusioninventoryMenu extends CommonGLPI {
          $width_status = PluginFusioninventoryMenu::htmlMenu(__('Guide', 'fusioninventory'),
                                                              $a_menu,
                                                              $type,
-                                                             $width_status);
+                                                             13);
       }
 
-
+      echo "</ul>";
+      echo "</div>";
+ 
+/*
       echo "</td>";
       echo "</tr>";
       echo "</table>";
@@ -513,6 +521,7 @@ class PluginFusioninventoryMenu extends CommonGLPI {
       echo "</tr>";
       echo "</table>";
       echo "</div><br/><br/><br/>";
+      */
    }
 
 
@@ -720,61 +729,29 @@ class PluginFusioninventoryMenu extends CommonGLPI {
     * @param integer $width_status
     * @return integer
     */
-   static function htmlMenu($menu_name, $a_menu = array(), $type = "big", $width_status=300) {
+   static function htmlMenu($menu_name, $a_menu = array(), $type = "big", $i) {
       global $CFG_GLPI;
 
-      $width_max = 1250;
+      
+      echo "<li id='menu$i' class='' onmouseover=\"javascript:menuAff('menu$i','fusionmenu');\">";
+      echo "<a class='itemP' href='#'> <img src='".$CFG_GLPI["root_doc"]."/pics/deplier_down.png' />
+         &nbsp;".str_replace("FusionInventory ", "", $menu_name)."&nbsp
+         <img src='".$CFG_GLPI["root_doc"]."/pics/deplier_down.png' /> </a>";
 
-      $width = 180;
-
-      if (($width + $width_status) > $width_max) {
-         $width_status = 0;
-         echo "</td>";
-         echo "</tr>";
-         echo "</table>";
-         echo "<table>";
-         echo "<tr>";
-         echo "<td valign='top'>";
-      } else {
-         echo "</td>";
-         echo "<td valign='top'>";
-      }
-      $width_status = ($width + $width_status);
-
-      echo "<table class='tab_cadre' style='position: relative; z-index: 30;'
-         onMouseOver='document.getElementById(\"menu".$menu_name."\").style.display=\"block\"'
-         onMouseOut='document.getElementById(\"menu".$menu_name."\").style.display=\"none\"'>";
-
-      echo "<tr>";
-      echo "<th colspan='".count($a_menu)."' nowrap width='".$width."'>
-         <img src='".$CFG_GLPI["root_doc"]."/pics/deplier_down.png' />
-         &nbsp;".str_replace("FusionInventory ", "", $menu_name)."&nbsp;
-         <img src='".$CFG_GLPI["root_doc"]."/pics/deplier_down.png' />
-      </th>";
-      echo "</tr>";
-
-      echo "<tr class='tab_bg_1' id='menu".$menu_name."' style='display:none; position: relative; z-index: 30;'>";
-      echo "<td>";
-      echo "<table>";
+      echo "<ul class='ssmenu' style='display: none;'>";
       foreach ($a_menu as $menu_id) {
-         echo "<tr>";
-         $menu_id['pic'] = str_replace("/menu_", "/menu_mini_", $menu_id['pic']);
-         echo "<th>";
-         if (!empty($menu_id['pic'])) {
-            echo "<img src='".$menu_id['pic']."' width='16' height='16'/>";
-         }
-         echo "</th>";
-         echo "<th colspan='".(count($a_menu) - 1)."' width='".($width - 40)."' style='text-align: left'>
-                  <a href='".$menu_id['link']."'>".$menu_id['name']."</a></th>";
-         echo "</tr>";
+              echo "<li class=''>";
+              $menu_id['pic'] = str_replace("/menu_", "/menu_mini_", $menu_id['pic']);
+              echo "<a href='".$menu_id['link']."'>";
+              if (!empty($menu_id['pic'])) {
+                  echo "<img src='".$menu_id['pic']."' width='16' height='16'/> &nbsp;";
+              }
+              echo $menu_id['name']."</a>";
+              echo "</li>";
       }
-      echo "</table>";
 
-      echo "</td>";
-      echo "</tr>";
-      echo "</table>";
-
-      return $width_status;
+      echo "</ul>";
+      echo "</li>";
    }
 
 
